@@ -21,17 +21,17 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
-    <div class="box-group" id="accordion">
+    <div class="box-group" id="accordion-{{$lang}}">
         <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
         <div class="panel box box-primary">
             <div class="box-header">
                 <h4 class="box-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo-{{$lang}}">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-{{$lang}}" href="#collapseTwo-{{$lang}}">
                         {{ trans('page::pages.form.meta_data') }}
                     </a>
                 </h4>
             </div>
-            <div style="height: 0px;" id="collapseTwo-{{$lang}}" class="panel-collapse collapse">
+            <div id="collapseTwo-{{$lang}}" class="panel-collapse collapse">
                 <div class="box-body">
                     <div class='form-group{{ $errors->has("{$lang}[meta_title]") ? ' has-error' : '' }}'>
                         {!! Form::label("{$lang}[meta_title]", trans('page::pages.form.meta_title')) !!}
@@ -49,12 +49,12 @@
         <div class="panel box box-primary">
             <div class="box-header">
                 <h4 class="box-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFacebook-{{$lang}}">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-{{$lang}}" href="#collapseFacebook-{{$lang}}">
                         {{ trans('page::pages.form.facebook_data') }}
                     </a>
                 </h4>
             </div>
-            <div style="height: 0px;" id="collapseFacebook-{{$lang}}" class="panel-collapse collapse">
+            <div id="collapseFacebook-{{$lang}}" class="panel-collapse collapse">
                 <div class="box-body">
                     <div class='form-group{{ $errors->has("{$lang}[og_title]") ? ' has-error' : '' }}'>
                         {!! Form::label("{$lang}[og_title]", trans('page::pages.form.og_title')) !!}
