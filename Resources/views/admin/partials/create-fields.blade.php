@@ -10,7 +10,7 @@
             {!! Form::text("{$lang}[slug]", old("{$lang}.slug"), ['class' => 'form-control slug', 'data-slug' => 'target', 'placeholder' => trans('page::pages.form.slug')]) !!}
             {!! $errors->first("{$lang}.slug", '<span class="help-block">:message</span>') !!}
         </div>
-        <div class='{{ $errors->has("{$lang}.body") ? ' has-error' : '' }}'>
+        <div class='form-group{{ $errors->has("{$lang}.body") ? ' has-error' : '' }}'>
             {!! Form::label("{$lang}[body]", trans('page::pages.form.body')) !!}
             <textarea class="ckeditor" name="{{$lang}}[body]" rows="10" cols="80">{{ old("{$lang}.body") }}</textarea>
             {!! $errors->first("{$lang}.body", '<span class="help-block">:message</span>') !!}
