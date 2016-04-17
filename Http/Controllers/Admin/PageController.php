@@ -46,9 +46,14 @@ class PageController extends AdminBaseController
      */
     public function store(CreatePageRequest $request)
     {
-        $this->page->create($request->all());
+        $page = $this->page->create($request->all());
 
         flash(trans('page::messages.page created'));
+
+        $submit = $request->get('submit');
+        if ($submit == trans('core.button.create and continue edit')) {
+            return redirect()->route('admin.page.page.edit', [$page->id]);
+        }
 
         return redirect()->route('admin.page.page.index');
     }
@@ -79,6 +84,11 @@ class PageController extends AdminBaseController
         $this->page->update($page, $request->all());
 
         flash(trans('page::messages.page updated'));
+
+        $submit = $request->get('submit');
+        if ($submit == trans('core.button.update and continue edit')) {
+            return redirect()->route('admin.page.page.edit', [$page->id]);
+        }
 
         return redirect()->route('admin.page.page.index');
     }
