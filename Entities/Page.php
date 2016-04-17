@@ -2,10 +2,11 @@
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Phoenix\EloquentMeta\MetaTrait;
 
 class Page extends Model
 {
-    use Translatable;
+    use Translatable, MetaTrait;
 
     protected $table = 'page__pages';
     public $translatedAttributes = [

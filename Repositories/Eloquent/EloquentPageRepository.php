@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 use Modules\Page\Events\PageWasCreated;
+use Modules\Page\Events\PageWasDeleted;
 use Modules\Page\Events\PageWasUpdated;
 use Modules\Page\Repositories\PageRepository;
 
@@ -51,6 +52,21 @@ class EloquentPageRepository extends EloquentBaseRepository implements PageRepos
         event(new PageWasUpdated($model->id, $data));
 
         return $model;
+    }
+
+    /**
+     * Create a news news
+     * @param  array $data
+     * @return News
+     */
+    public function destroy($data)
+    {
+        $destroy = $this->model->destroy($data->id);
+        if ($destroy) {
+            event(new PageWasDeleted($data->id));
+        }
+
+        return $destroy;
     }
 
     /**
