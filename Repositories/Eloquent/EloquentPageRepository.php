@@ -33,6 +33,9 @@ class EloquentPageRepository extends EloquentBaseRepository implements PageRepos
      */
     public function create($data)
     {
+        if (array_get($data, 'is_home') === '1') {
+            $this->removeOtherHomepage();
+        }
         $page = $this->model->create($data);
 
         event(new PageWasCreated($page->id, $data));
@@ -47,17 +50,19 @@ class EloquentPageRepository extends EloquentBaseRepository implements PageRepos
      */
     public function update($model, $data)
     {
+        if (array_get($data, 'is_home') === '1') {
+            $this->removeOtherHomepage();
+        }
         $model->update($data);
 
         event(new PageWasUpdated($model->id, $data));
 
         return $model;
     }
-
+    
     /**
-     * Create a news news
      * @param  array $data
-     * @return News
+     * @return object
      */
     public function destroy($data)
     {
@@ -84,5 +89,18 @@ class EloquentPageRepository extends EloquentBaseRepository implements PageRepos
         }
 
         return $this->model->where('slug', $slug)->where('locale', $locale)->first();
+    }
+
+    /**
+     * Set the current page set as homepage to 0
+     */
+    private function removeOtherHomepage()
+    {
+        $homepage = $this->findHomepage();
+        if ($homepage === null) {
+            return;
+        }
+        $homepage->is_home = 0;
+        $homepage->save();
     }
 }

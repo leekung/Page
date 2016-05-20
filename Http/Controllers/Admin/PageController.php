@@ -35,6 +35,8 @@ class PageController extends AdminBaseController
      */
     public function create()
     {
+        $this->assetPipeline->requireJs('ckeditor.js');
+
         return view('page::admin.create');
     }
 
@@ -67,7 +69,6 @@ class PageController extends AdminBaseController
     public function edit(Page $page)
     {
         $this->assetPipeline->requireJs('ckeditor.js');
-        $this->assetPipeline->requireCss('icheck.blue.css');
 
         return view('page::admin.edit', compact('page'));
     }
@@ -85,12 +86,11 @@ class PageController extends AdminBaseController
 
         flash(trans('page::messages.page updated'));
 
-        $submit = $request->get('submit');
-        if ($submit == trans('core.button.update and continue edit')) {
-            return redirect()->route('admin.page.page.edit', [$page->id]);
+        if ($request->get('button') === 'index') {
+            return redirect()->route('admin.page.page.index');
         }
 
-        return redirect()->route('admin.page.page.index');
+        return redirect()->back();
     }
 
     /**
