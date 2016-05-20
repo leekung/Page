@@ -2,11 +2,13 @@
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Media\Support\Traits\MediaRelation;
+use OwenIt\Auditing\AuditingTrait;
 use Phoenix\EloquentMeta\MetaTrait;
 
 class Page extends Model
 {
-    use Translatable, MetaTrait;
+    use Translatable, MetaTrait, MediaRelation, AuditingTrait;
 
     protected $table = 'page__pages';
     public $translatedAttributes = [

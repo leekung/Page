@@ -8,6 +8,7 @@
     "order": 9999,
     "providers": [
         "Modules\\Page\\Providers\\RouteServiceProvider",
+        "Modules\\Page\\Providers\\EventServiceProvider",
         "Modules\\Page\\Providers\\PageServiceProvider"
     ],
     "files": [

@@ -46,6 +46,7 @@
                             </td>
                             <td>
                                 <a href="{{ URL::route('admin.page.page.edit', [$page->id]) }}">
+                                    {!! isset($page->is_home) && (bool)$page->is_home == true ? '<i class="fa fa-home"></i>' : ''  !!}
                                     {{ $page->title }}
                                 </a>
                             </td>

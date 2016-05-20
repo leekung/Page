@@ -1,6 +1,7 @@
 <?php namespace Modules\Page\Http\Controllers\Admin;
 
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
+use Modules\Media\Repositories\FileRepository;
 use Modules\Page\Entities\Page;
 use Modules\Page\Http\Requests\CreatePageRequest;
 use Modules\Page\Http\Requests\UpdatePageRequest;
@@ -12,13 +13,18 @@ class PageController extends AdminBaseController
      * @var PageRepository
      */
     private $page;
+    /**
+     * @var FileRepository
+     */
+    private $file;
 
-    public function __construct(PageRepository $page)
+    public function __construct(PageRepository $page, FileRepository $file)
     {
         parent::__construct();
 
         $this->page = $page;
         $this->assetPipeline->requireCss('icheck.blue.css');
+        $this->file = $file;
     }
 
     public function index()
@@ -69,8 +75,9 @@ class PageController extends AdminBaseController
     public function edit(Page $page)
     {
         $this->assetPipeline->requireJs('ckeditor.js');
+        $thumbnail = $this->file->findFileByZoneForEntity('thumbnail', $page);
 
-        return view('page::admin.edit', compact('page'));
+        return view('page::admin.edit', compact('page', 'thumbnail'));
     }
 
     /**
