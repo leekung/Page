@@ -32,7 +32,7 @@ class TemplateViewComposer
 
         $templates = [];
 
-        foreach ($this->finder->allFiles($path . '/views/page') as $template) {
+        foreach ($this->finder->allFiles($path . '/views') as $template) {
             $relativePath = $template->getRelativePath();
 
             if ($this->isLayoutOrPartial($relativePath)) {
