@@ -14,7 +14,7 @@
             {!! $errors->first("{$lang}.slug", '<span class="help-block">:message</span>') !!}
         </div>
         @else
-            {!! Form::hidden("{$lang}[slug]", old("{$lang}.slug", $old)) !!}
+            {!! Form::hidden("{$lang}[slug]", old("{$lang}.slug", $page->hasTranslation($lang) ? $page->translate($lang)->slug : '')) !!}
         @endif
         <div class='form-group{{ $errors->has("{$lang}.body") ? ' has-error' : '' }}'>
             {!! Form::label("{$lang}[body]", trans('page::pages.form.body')) !!}
@@ -25,7 +25,7 @@
         <div class='form-group{{ $errors->has("{$lang}.code") ? ' has-error' : '' }}'>
             {!! Form::label("{$lang}[code]", trans('page::pages.form.code')) !!}
             <?php $old = $page->hasTranslation($lang) ? $page->translate($lang)->code : '' ?>
-            <textarea class="form-control" name="{{$lang}}[code]" rows="10" cols="80">{!! old("$lang.code", $old) !!}</textarea>
+            <textarea class="form-control" name="{{$lang}}[code]" rows="10" cols="80">{{ old("$lang.code", $old) }}</textarea>
             {!! $errors->first("{$lang}.code", '<span class="help-block">:message</span>') !!}
         </div>
         <?php if (config('asgard.page.config.partials.translatable.edit') !== []): ?>
