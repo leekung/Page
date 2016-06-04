@@ -56,6 +56,7 @@
         <div class="col-md-2">
             <div class="box box-primary">
                 <div class="box-body">
+                    @if(app('Modules\Core\Contracts\Authentication')->check()->hasAccess('page.pages.modify'))
                     <div class="checkbox{{ $errors->has('is_home') ? ' has-error' : '' }}">
                         <input type="hidden" name="is_home" value="0">
                         <label for="is_home">
@@ -75,6 +76,10 @@
                         {!! Form::select("template", $all_templates, old("template", $page->template), ['class' => "form-control", 'placeholder' => trans('page::pages.form.template')]) !!}
                         {!! $errors->first("template", '<span class="help-block">:message</span>') !!}
                     </div>
+                    @else
+                        {!! Form::hidden("template", old("template", $page->template)) !!}
+                        {!! Form::hidden("is_home", old("is_home", intval($page->is_home))) !!}
+                    @endif
                     @include('media::admin.fields.file-link', [
                         'entityClass' => 'Modules\\\\Page\\\\Entities\\\\Page',
                         'entityId' => $page->id,

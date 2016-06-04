@@ -6,12 +6,16 @@
             {!! Form::text("{$lang}[title]", old("{$lang}.title", $old), ['class' => 'form-control', 'data-slug' => 'source', 'placeholder' => trans('page::pages.form.title')]) !!}
             {!! $errors->first("{$lang}.title", '<span class="help-block">:message</span>') !!}
         </div>
+        @if(app('Modules\Core\Contracts\Authentication')->check()->hasAccess('page.pages.modify'))
         <div class='form-group{{ $errors->has("{$lang}[slug]") ? ' has-error' : '' }}'>
             {!! Form::label("{$lang}[slug]", trans('page::pages.form.slug')) !!}
             <?php $old = $page->hasTranslation($lang) ? $page->translate($lang)->slug : '' ?>
             {!! Form::text("{$lang}[slug]", old("{$lang}.slug", $old), ['class' => 'form-control slug', 'data-slug' => 'target', 'placeholder' => trans('page::pages.form.slug')]) !!}
             {!! $errors->first("{$lang}.slug", '<span class="help-block">:message</span>') !!}
         </div>
+        @else
+            {!! Form::hidden("{$lang}[slug]", old("{$lang}.slug", $old)) !!}
+        @endif
         <div class='form-group{{ $errors->has("{$lang}.body") ? ' has-error' : '' }}'>
             {!! Form::label("{$lang}[body]", trans('page::pages.form.body')) !!}
             <?php $old = $page->hasTranslation($lang) ? $page->translate($lang)->body : '' ?>
