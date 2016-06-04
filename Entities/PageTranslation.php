@@ -11,6 +11,7 @@ class PageTranslation extends Model
         'slug',
         'status',
         'body',
+        'code',
         'meta_title',
         'meta_description',
         'og_title',

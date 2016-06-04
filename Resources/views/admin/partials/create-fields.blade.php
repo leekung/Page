@@ -15,6 +15,11 @@
             <textarea class="ckeditor" name="{{$lang}}[body]" rows="10" cols="80">{{ old("{$lang}.body") }}</textarea>
             {!! $errors->first("{$lang}.body", '<span class="help-block">:message</span>') !!}
         </div>
+        <div class='form-group{{ $errors->has("{$lang}.code") ? ' has-error' : '' }}'>
+            {!! Form::label("{$lang}[code]", trans('page::pages.form.code')) !!}
+            <textarea class="form-control" name="{{$lang}}[code]" rows="10" cols="80">{{ old("{$lang}.code") }}</textarea>
+            {!! $errors->first("{$lang}.code", '<span class="help-block">:message</span>') !!}
+        </div>
         <?php if (config('asgard.page.config.partials.translatable.create') !== []): ?>
             <?php foreach (config('asgard.page.config.partials.translatable.create') as $partial): ?>
                 @include($partial)

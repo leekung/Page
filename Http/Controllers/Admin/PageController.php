@@ -59,7 +59,7 @@ class PageController extends AdminBaseController
         flash(trans('page::messages.page created'));
 
         $submit = $request->get('submit');
-        if ($submit == trans('core.button.create and continue edit')) {
+        if ($submit == trans('core::core.button.update and continue edit')) {
             return redirect()->route('admin.page.page.edit', [$page->id]);
         }
 
