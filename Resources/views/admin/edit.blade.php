@@ -38,6 +38,16 @@
                             @include($partial)
                         <?php endforeach; ?>
                     <?php endif; ?>
+                    <div class="box-body">
+                        <div class='form-group'>
+                            @include('media::admin.fields.file-link-multiple', [
+                                'entityClass' => 'Modules\\\\Page\\\\Entities\\\\Page',
+                                'entityId' => $page->id,
+                                'accept' => '.(jpe?g|png|gif)$',
+                                'zone' => 'gallery'
+                            ])
+                        </div>
+                    </div>
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary btn-flat" name="button" value="index" >

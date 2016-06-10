@@ -75,9 +75,10 @@ class PageController extends AdminBaseController
     public function edit(Page $page)
     {
         $this->assetPipeline->requireJs('ckeditor.js');
+        $galleryFiles = $this->file->findMultipleFilesByZoneForEntity('gallery', $page);
         $thumbnail = $this->file->findFileByZoneForEntity('thumbnail', $page);
 
-        return view('page::admin.edit', compact('page', 'thumbnail'));
+        return view('page::admin.edit', compact('page', 'thumbnail', 'galleryFiles'));
     }
 
     /**

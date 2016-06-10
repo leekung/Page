@@ -39,9 +39,10 @@ class PublicController extends BasePublicController
         $this->throw404IfNotFound($page);
 
         $template = $this->getTemplateForPage($page);
+        $galleryFiles = $this->file->findMultipleFilesByZoneForEntity('gallery', $page);
         $thumbnail = $this->file->findFileByZoneForEntity('thumbnail', $page);
 
-        return view($template, compact('page', 'thumbnail'));
+        return view($template, compact('page', 'galleryFiles', 'thumbnail'));
     }
 
     /**
