@@ -6,6 +6,7 @@ use Modules\Page\Entities\Page;
 use Modules\Page\Http\Requests\CreatePageRequest;
 use Modules\Page\Http\Requests\UpdatePageRequest;
 use Modules\Page\Repositories\PageRepository;
+use Modules\Page\Events\PageWasDeleted;
 
 class PageController extends AdminBaseController
 {

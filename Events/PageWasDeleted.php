@@ -2,16 +2,15 @@
 
 namespace Modules\Page\Events;
 
-
 class PageWasDeleted
 {
     /**
-     * @var int
+     * @var object
      */
-    public $pageId;
+    public $page;
 
-    public function __construct($pageId)
+    public function __construct($page)
     {
-        $this->pageId = $pageId;
+        $this->page = $page;
     }
 }
