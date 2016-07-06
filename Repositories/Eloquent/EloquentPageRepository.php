@@ -68,17 +68,10 @@ class EloquentPageRepository extends EloquentBaseRepository implements PageRepos
     {
         $destroy = $this->model->destroy($data->id);
         if ($destroy) {
-            event(new PageWasDeleted($data->id));
+            event(new PageWasDeleted($destroy));
         }
 
         return $destroy;
-    }
-
-    public function destroy($model)
-    {
-        event(new PageWasDeleted($model));
-
-        return $model->delete();
     }
 
     /**
